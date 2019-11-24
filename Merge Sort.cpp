@@ -15,42 +15,42 @@ void merge_sort(int* p, int len) {
 	mid = len / 2;
 	l = 0, r = mid, k = 0;
 
-	merge_sort(p, mid);                          // ³ª´©±â ¿ÞÂÊ
-	merge_sort(p + mid, len - mid);              // ³ª´©±â ¿À¸¥ÂÊ
+	merge_sort(p, mid);                             // ë‚˜ëˆ„ê¸° ì™¼ìª½
+	merge_sort(p + mid, len - mid);                 // ë‚˜ëˆ„ê¸° ì˜¤ë¥¸ìª½
 
-	while (l < mid && r < len) {                 // º´ÇÕ
-		if (p[l] < p[r]) arr_buf[k++] = p[l++];  // ¿ÞÂÊ °ª
-		else             arr_buf[k++] = p[r++];  // ¿À¸¥ÂÊ °ª
+	while (l < mid && r < len) {                    // ë³‘í•©
+		if (p[l] < p[r]) arr_buf[k++] = p[l++]; // ì™¼ìª½ ê°’
+		else             arr_buf[k++] = p[r++]; // ì˜¤ë¥¸ìª½ ê°’
 	}
-	while (l < mid) arr_buf[k++] = p[l++];       // ¿ÞÂÊ ³²Àº °ª
-	while (r < len) arr_buf[k++] = p[r++];       // ¿À¸¥ÂÊ ³²Àº °ª
+	while (l < mid) arr_buf[k++] = p[l++];          // ì™¼ìª½ ë‚¨ì€ ê°’
+	while (r < len) arr_buf[k++] = p[r++];          // ì˜¤ë¥¸ìª½ ë‚¨ì€ ê°’
 
-	for (int i = 0; i < len; ++i)                // ¿øº»¿¡ ÀÔ·Â
+	for (int i = 0; i < len; ++i)                   // ì›ë³¸ì— ìž…ë ¥
 		p[i] = arr_buf[i];
 }
 
 int main()
 {
-	// ÄÉÀÌ½º »ý¼º
+	// ì¼€ì´ìŠ¤ ìƒì„±
 	for (int i = 0; i < ARR_SIZE; ++i)
 		arr_merge[i] = arr_stl[i] = rand();
 
-	// merge Á¤·Ä
+	// merge ì •ë ¬
 	int merge_begin = GetTickCount64();
 	merge_sort(arr_merge, ARR_SIZE);
 	int merge_end = GetTickCount64();
 
-	// stl Á¤·Ä
+	// stl ì •ë ¬
 	int stl_begin = GetTickCount64();
 	sort(arr_stl, arr_stl + ARR_SIZE);
 	int stl_end = GetTickCount64();
 
-	// Á¤È®¼º Ã¼Å©
+	// ì •í™•ì„± ì²´í¬
 	for (int i = 0; i < ARR_SIZE; ++i)
 		if (arr_merge[i] != arr_stl[i])
 			cout << "Error" << endl;
 
-	// ¼Ò¿ä½Ã°£ Ãâ·Â
+	// ì†Œìš”ì‹œê°„ ì¶œë ¥
 	cout << "merge : " << (merge_end - merge_begin) << endl;
 	cout << "stl   : " << (stl_end - stl_begin) << endl;
 
